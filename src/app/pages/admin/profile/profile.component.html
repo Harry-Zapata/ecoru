@@ -1,0 +1,41 @@
+<!-- profile.component.html -->
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Perfil de Usuario</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="assets/profile-pic.jpg" class="img-fluid rounded-circle mb-3" alt="Imagen de perfil">
+          </div>
+          <div class="col-md-8">
+            <form>
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" value="Juan Pérez" [disabled]="!editMode">
+              </div>
+              <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico:</label>
+                <input type="email" class="form-control" id="correo" value="juan.perez@example.com" [disabled]="!editMode">
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="tel" class="form-control" id="telefono" value="123-456-7890" [disabled]="!editMode">
+              </div>
+              <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <textarea class="form-control" id="direccion" rows="3" [disabled]="!editMode">123 Calle Principal, Ciudad</textarea>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary me-2" *ngIf="!editMode" (click)="editarPerfil()">Editar Perfil</button>
+                <button type="button" class="btn btn-success me-2" *ngIf="editMode" (click)="guardarCambios()">Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" *ngIf="editMode" (click)="cancelarEdicion()">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

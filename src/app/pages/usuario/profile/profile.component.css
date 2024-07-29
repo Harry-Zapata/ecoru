@@ -1,0 +1,6 @@
+:host {
+  display: block;
+}
+.image-upload img {
+  cursor: pointer;
+}

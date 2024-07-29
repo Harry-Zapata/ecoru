@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">ECORÚ</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <ng-container *ngIf="user; else loggedOut">
+            <li class="nav-item dropdown" *ngIf="isAdmin">
+              <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.fullName }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/profile']">
+                    <img src="https://static.vecteezy.com/system/resources/previews/007/033/146/non_2x/profile-icon-login-head-icon-vector.jpg" alt="Perfil" width="24" height="24" style="margin-right: 8px;">
+                    Perfil
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/reservations']">
+                    <img src="https://i.pinimg.com/474x/00/d1/24/00d124e773dd0170b57bc214792289d3.jpg" alt="Reservas" width="24" height="24" style="margin-right: 8px;">
+                    Reservas
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/history']"> 
+                    <img src="https://cdn-icons-png.flaticon.com/512/88/88450.png" alt="Informes de Viaje" width="24" height="24" style="margin-right: 8px;">
+                    Informes de Viaje
+                  </a>
+                </li>
+                    <!-- falta crear interface para agregar admin -->
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/add-admin']">
+                    <img src="https://cdn.pixabay.com/photo/2017/07/11/13/56/user-2493635_1280.png" alt="Añadir Admin" width="24" height="24" style="margin-right: 8px;">
+                    Añadir Administrador
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/dash']">
+                    <img src="https://png.pngtree.com/element_our/png_detail/20181227/report-glyph-black-icon-png_292943.jpg" alt="Informes de Actividad" width="24" height="24" style="margin-right: 8px;">
+                    Informes de Actividad
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="logout()" style="color:white; background-color: red; border: 1px solid red; border-radius: 4px; padding: 8px 16px; display: flex; align-items: center; text-align: center;">
+                    <img src="https://cdn-icons-png.freepik.com/512/59/59399.png" alt="Cerrar Sesión" width="24" height="24" style="margin-right: 8px;">
+                    Cerrar Sesión
+                  </a>                  
+                </li>
+                
+              </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="!isAdmin">
+              <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.fullName }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" [routerLink]="['/profile']">Perfil</a></li>
+                <li><a class="dropdown-item" (click)="logout()">Cerrar Sesión</a></li>
+              </ul>
+            </li>
+          </ng-container> 
+          <ng-template #loggedOut>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                Acceso
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar Sesión</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/register']">Registrarse</a></li>
+              </ul>
+            </li>
+          </ng-template>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

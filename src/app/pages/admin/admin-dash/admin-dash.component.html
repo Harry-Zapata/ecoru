@@ -1,0 +1,20 @@
+<button class="btn btn-secondary back-button" onclick="window.history.back()">Regresar</button>     
+<div class="container mt-5">
+    <h2 class="mb-4">Actividades de Usuarios</h2>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Usuario</th>
+                <th>Acción</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let activity of activities">
+                <td>{{ activity.user }}</td>
+                <td>{{ activity.action }}</td>
+                <td>{{ activity.date }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

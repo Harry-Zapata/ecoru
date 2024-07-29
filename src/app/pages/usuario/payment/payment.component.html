@@ -1,0 +1,114 @@
+<div class="container">
+  <!-- Botón de regresar -->
+  <div class="mb-3">
+    <button class="btn btn-secondary" onclick="window.history.back()">Regresar</button>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="image-box">
+          <img [src]="trip?.image" class="card-img-top" alt="Imagen del viaje">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Detalles del Viaje</h5>
+          <p class="card-text details"><strong>NOMBRE:</strong> {{ trip?.name }}</p>
+          <p><strong>Costo Total:</strong> ${{ costoTotal }}</p>
+          <p class="card-text details"><strong>FECHA SALIDA:</strong> {{ trip?.startDate }}</p>
+          <p class="card-text details"><strong>FECHA LLEGADA:</strong> {{ trip?.endDate }}</p>
+          <div class="bus-info">
+            <h5 class="card-title">Información del Bus</h5>
+            <p class="card-text details"><strong>Nombre:</strong> {{ trip?.busName }}</p>
+            <p class="card-text details"><strong>Placa:</strong> {{ trip?.busPlate }}</p>
+            <p class="card-text details"><strong>Ubicación:</strong> {{ trip?.busLocation }}</p>
+            <p class="card-text details"><strong>Asientos Disponibles:</strong>
+              <select class="form-select" [(ngModel)]="cantidadAsientos" (ngModelChange)="actualizarCostoTotal()">
+                <option *ngFor="let asiento of asientosDisponibles">{{ asiento }}</option>
+              </select>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Información de Reserva y Pago -->
+      <div class="ticket">
+        <h5 class="card-title">Información de Reserva y Pago</h5>
+        <form (submit)="reservarAsientos()" [formGroup]="form">
+          <!-- Información Personal -->
+          <div class="row">
+            <div class="col mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                placeholder="Ingrese su nombre">
+            </div>
+            <div class="col mb-3">
+              <label for="apellido" class="form-label">Apellidos:</label>
+              <input type="text" class="form-control" id="apellido" formControlName="apellidos"
+                placeholder="Ingrese sus apellidos">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <label for="telefono" class="form-label">Teléfono:</label>
+              <input type="tel" class="form-control" id="telefono" formControlName="telefono"
+                placeholder="Ingrese su telefono">
+            </div>
+            <div class="mb-3 col">
+              <label for="dni" class="form-label">DNI:</label>
+              <input type="text" class="form-control" id="dni" formControlName="dni" placeholder="Ingrese su DNI">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="email" formControlName="email"
+              placeholder="Ingrese su correo electrónico">
+          </div>
+          <!-- Detalles del Pago -->
+          <div class="mb-3">
+            <label for="metodoPago" class="form-label">Método de Pago:</label>
+            <select class="form-select" id="metodoPago" formControlName="metodoPago">
+              <option selected>Seleccionar método de pago</option>
+              <option value="visa">Visa</option>
+              <option value="mastercard">Mastercard</option>
+              <option value="amex">American Express</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="numeroTarjeta" class="form-label">Número de Tarjeta:</label>
+            <input type="text" class="form-control" id="numeroTarjeta" formControlName="numeroTarjeta"
+              placeholder="Ingrese el número de tarjeta">
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="codigoVerificacion" class="form-label">Código de Verificación:</label>
+              <input type="text" class="form-control" id="codigoVerificacion" formControlName="codigoVerificacion"
+                placeholder="CVC">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="fechaExpiracion" class="form-label">Fecha de Expiración:</label>
+              <input type="text" class="form-control" id="fechaExpiracion" formControlName="fechaExpiracion"
+                placeholder="MM/YY">
+            </div>
+          </div>
+          <!-- Captcha Simulado -->
+          <div class="captcha-container">
+            <div class="captcha-box">
+              <label for="captcha" class="captcha-label">Por favor, confirme que no es un robot:</label>
+              <input type="text" class="form-control captcha-input" formControlName="captcha" id="captcha"
+                placeholder="Captcha">
+              <span class="ms-2"><img
+                  src="https://www.shutterstock.com/es/image-photo/black-number-1526-on-white-wall-2031854411"
+                  alt="Captcha Image"></span>
+            </div>
+          </div>
+          <!-- Botón de Pagar -->
+          <button type="submit" class="btn btn-danger mt-3">Pagar</button>
+        </form>
+      </div>
+      <!-- Costo Total -->
+      <div class="mt-3">
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="container-fluid">
+    <app-navbar></app-navbar> <!--navbar aqui-->
+
+    <!-- Barra de búsqueda -->
+    <div class="container mt-4 search-bar">
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <label class="form-label" for="origin">Origen</label>
+                <select id="origin" class="form-control">
+                    <option>ORIGEN</option>
+                    <option>Trujillo</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="destination">Destino</label>
+                <select id="destination" class="form-control">
+                    <option>DESTINOS</option>
+                    <option>Cajamarca</option>
+                    <option>Lima</option>
+                    <option>Chiclayo</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="start-date">Fecha de inicio:</label>
+                <input type="date" id="start-date" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" for="end-date">Fecha de llegada:</label>
+                <input type="date" id="end-date" class="form-control">
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link " routerLink="/list">ACTIVADOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " routerLink="/edit">DESACTIVADOS</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link active" routerLink="/add">AÑADIR</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-section">
+        <div class="image-upload">
+            <span>Insertar imagen</span>
+            <input type="file" id="image-upload" accept="image/*">
+        </div>
+        <div class="form-fields">
+            <label for="nombre">NOMBRE:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control">
+
+            <label for="descripcion">DESCRIPCIÓN:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" class="form-control"></textarea>
+
+            <label for="costo">COSTO:</label>
+            <input type="number" id="costo" name="costo" class="form-control">
+
+            <label for="fecha-salida">FECHA SALIDA:</label>
+            <input type="date" id="fecha-salida" name="fecha-salida" class="form-control">
+
+            <label for="fecha-llegada">FECHA LLEGADA:</label>
+            <input type="date" id="fecha-llegada" name="fecha-llegada" class="form-control">
+
+            <!-- Botón para añadir bus -->
+            <button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarBus">
+                <i class="bi bi-bus-front-fill"></i> AÑADIR BUS
+            </button>
+
+
+            <!-- Botón para activar descuento con modal -->
+            <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modalDescuento">
+                <i class="bi bi-percent"></i> Activar Descuento
+            </button>
+
+            <!-- Modal para ingresar el porcentaje de descuento -->
+            <div class="modal fade" id="modalDescuento" tabindex="-1" aria-labelledby="modalDescuentoLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm"> <!-- Tamaño del modal pequeño -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDescuentoLabel">Ingresar porcentaje de descuento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control"
+                                placeholder="Ingrese dato" id="inputDescuento" style="width: 10%; height: 50px; font-size: 16px;">
+                                <span class="input-group-text" style="height: 50px;">%</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="agregarDescuento()">Aplicar
+                                Descuento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Etiqueta para mostrar el descuento aplicado (no funciona xd)-->
+            <div id="descuentoAplicado"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="container-fluid">
+
+        <!-- Modal para formulario de bus -->
+        <div class="modal fade" id="modalAgregarBus" tabindex="-1" aria-labelledby="modalAgregarBusLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAgregarBusLabel">Añadir Bus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="numero">Número:</label>
+                            <input type="text" id="numero" name="numero" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="placa">Placa:</label>
+                            <input type="text" id="placa" name="placa" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacidad">Capacidad:</label>
+                            <input type="number" id="capacidad" name="capacidad" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="estacion">Estación:</label>
+                            <select class="form-select" id="metodoPago">
+                                <option selected>Elija estación</option>
+                                <option value="Estacion 01">Estacion 01</option>
+                                <option value="Estacion 02">Estacion 02</option>
+                                <option value="Estacion 03  ">Estacion 03</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button class="btn btn-danger cancel-btn">CANCELAR</button>
+        <button class="btn btn-success add-btn">AÑADIR</button>
+    </div>
+</div>

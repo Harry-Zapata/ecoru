@@ -1,0 +1,69 @@
+<button class="btn btn-secondary back-button" onclick="window.history.back()">Regresar</button>
+<div class="container p-1">
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="image-box">
+                <img [src]="trip?.image" alt="Imagen del viaje">
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles del Viaje</h5>
+                    <p class="card-text"><strong>NOMBRE:</strong> {{ trip?.name }}</p>
+                    <p class="card-text"><strong>DESCRIPCIÓN:</strong> {{ trip?.description }}</p>
+                    <p class="card-text"><strong>COSTO:</strong> ${{ trip?.cost }}</p>
+                    <p class="card-text"><strong>FECHA SALIDA:</strong> {{ trip?.startDate }}</p>
+                    <p class="card-text"><strong>FECHA LLEGADA:</strong> {{ trip?.endDate }}</p>
+                    <div class="bus-info">
+                        <h5 class="card-title">Información del Bus</h5>
+                        <p class="card-text"><strong>Nombre:</strong> {{ trip?.busName }}</p>
+                        <p class="card-text"><strong>Placa:</strong> {{ trip?.busPlate }}</p>
+                        <p class="card-text"><strong>Ubicación:</strong> {{ trip?.busLocation }}</p>
+                        <p class="card-text"><strong>Asientos Disponibles:</strong> {{ trip?.seatsAvailable }}</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-danger" (click)="verDetalles(trip)">Reservar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="comment-box d-flex">
+            <img src="https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg"
+                alt="Avatar" class="comment-avatar me-3">
+            <div>
+                <h5 class="mt-0">Ximena Pastor</h5>
+                <p>Un lugar muy lindo</p>
+            </div>
+        </div>
+        <!-- Agregar más comentarios -->
+        <div class="comment-box d-flex">
+            <img src="https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg"
+                alt="Avatar" class="comment-avatar me-3">
+            <div>
+                <h5 class="mt-0">Juan Pérez</h5>
+                <p>Qué increíble lugar para vacacionar.</p>
+            </div>
+        </div>
+        <div class="comment-box d-flex">
+            <img src="https://www.dzoom.org.es/wp-content/uploads/2020/02/portada-foto-perfil-redes-sociales-consejos.jpg"
+                alt="Avatar" class="comment-avatar me-3">
+            <div>
+                <h5 class="mt-0">María López</h5>
+                <p>Me encantaría visitar este lugar algún día.</p>
+            </div>
+
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-primary ">Dejar un comentario</button>
+        </div>
+    </div>
+
+</div>

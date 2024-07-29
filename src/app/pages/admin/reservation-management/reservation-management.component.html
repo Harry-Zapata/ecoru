@@ -1,0 +1,78 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Gestión de Reservas</h2>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Fechas</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.user }}</td>
+          <td>{{ reservation.dates }}</td>
+          <td>{{ reservation.status }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#viewReservationModal" (click)="selectReservation(reservation)">
+              <i class="fas fa-eye"></i> Ver
+            </button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#printReservationModal" (click)="selectReservation(reservation)">
+              <i class="fas fa-print"></i> Imprimir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal for Viewing Reservation -->
+  <div class="modal fade" id="viewReservationModal" tabindex="-1" aria-labelledby="viewReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewReservationModalLabel">Detalles de la Reserva</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>ID:</strong> {{ selectedReservation?.id }}</p>
+          <p><strong>Usuario:</strong> {{ selectedReservation?.user }}</p>
+          <p><strong>Fechas:</strong> {{ selectedReservation?.dates }}</p>
+          <p><strong>Estado:</strong> {{ selectedReservation?.status }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal for Printing Reservation -->
+  <div class="modal fade" id="printReservationModal" tabindex="-1" aria-labelledby="printReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="printReservationModalLabel">Imprimir Reserva</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="printSection">
+            <p><strong>ID:</strong> {{ selectedReservation?.id }}</p>
+            <p><strong>Usuario:</strong> {{ selectedReservation?.user }}</p>
+            <p><strong>Fechas:</strong> {{ selectedReservation?.dates }}</p>
+            <p><strong>Estado:</strong> {{ selectedReservation?.status }}</p>
+            <p><strong>Precio Total:</strong> {{ selectedReservation?.totalPrice }}</p>
+            <!-- Add any other relevant details here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger" (click)="printReservation()">Imprimir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
