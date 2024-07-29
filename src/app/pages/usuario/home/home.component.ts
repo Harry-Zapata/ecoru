@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   trips = [
     { image: 'https://www.peru.travel/Contenido/Destino/Imagen/es/8/1.4/Principal/lima-banner-3.jpg', description: 'Lima, la ciudad de cerros con lunas', name: 'Lima', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
     { image: 'https://media.istockphoto.com/id/458569733/es/foto/city-square-en-ayacucho-per%C3%BA.jpg?s=612x612&w=0&k=20&c=8eVqNlaNJLdHYIpPoI8HQ-rOvfi9EKkCl4rkEwYa9bc=', description: 'Ayacucho abrigador', name: 'Ayacucho', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus abc', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
@@ -19,24 +20,50 @@ export class HomeComponent {
     { image: 'https://e.rpp-noticias.io/large/2014/08/01/1068979.jpg', description: 'Cascas inolvidable', name: 'Cascas', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
     { image: 'https://noticias-pe.laiglesiadejesucristo.org/media/960x540/Chimbote-2.jpg', description: 'Chimbote mágico', name: 'Chimbote', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },// Otros viajes aquí
   ];
+  filtroBackUp: any[] = [];
   user: string | null | undefined;
+  ciudades:any = []
+  filtro: FormGroup;
+  constructor(private router: Router, private fb: FormBuilder) {
+    this.filtro = this.fb.group({
+      origen: [''],
+      destino: [''],
+      fechaInicio: [''],
+      fechaFin: [''],
+    });
+  }
 
-  constructor(private router: Router) {}
-  // ngOnInit() {
-  //   this.user = localStorage.getItem('user');
-  //   if (!this.user) {
-  //     this.router.navigate(['/login']);
-  //   }
-  // }
+  ngOnInit(): void {
+    this.filtroBackUp = this.trips;
+    this.trips.forEach((trip) => {
+      if (!this.ciudades.includes(trip.name)) {
+        this.ciudades.push(trip.name);
+      }
+    })
 
-  // logout() {
-  //   localStorage.removeItem('user');
-  //   this.router.navigate(['/login']);
-  // }
-
-
+    console.log(this.ciudades);
+    
+  }
   verDetalles(trip: any): void {
     this.router.navigate(['/trip-details'], { state: { trip } });
     // Navega a la ruta `/trip-details` y pasa el objeto `trip` en el estado de la historia.
+  }
+
+  filtrarDatos() {
+    this.filtroBackUp = this.trips;
+    let destino = this.filtro.value['destino'];
+    let origen = this.filtro.value['origen'];
+    let fechaInicio = this.filtro.value['fechaInicio'];
+    let fechaFin = this.filtro.value['fechaFin'];
+
+
+    const coincidencias = this.filtroBackUp.some((trip) => trip.name.toLowerCase() === destino.toLowerCase());
+
+    if (coincidencias) {
+      this.filtroBackUp = this.filtroBackUp.filter((trip) => {
+        return trip.name.toLowerCase() === destino.toLowerCase();
+      });
+    }
+
   }
 }

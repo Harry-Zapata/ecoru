@@ -75,6 +75,8 @@ export class PaymentComponent implements OnInit {
     let boletas = JSON.parse(localStorage.getItem('boletas') || '[]');
     boletas.push(obj);
     localStorage.setItem('boletas', JSON.stringify(boletas));
+
+    this.router.navigate(['/boleta/' + this.contador]);
   }
 
 }

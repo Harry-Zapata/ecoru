@@ -1,1 +1,107 @@
-<p>boleta works!</p>
+<section class="boleta container">
+    <div class="row">
+        <div class="col-12 text-center my-3">
+            <h4>ECORÚ EMPRESA SAC</h4>
+            <h6>Felicidades {{boleta.name + " " + boleta.apellidos}}!</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-end">
+            <p><strong>ECORÚ SAC</strong></p>
+            <p>RUC: 20264735899</p>
+            <p>N° FACTURA: {{boleta.id}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Nombres:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.name}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Fecha de Emisión:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.fechaEmision}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Apellidos:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.apellidos}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Teléfono:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.telefono}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>N° DNI:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.dni}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Fecha de Viaje:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.fechaViaje}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Descripción:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.descripcion}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Destino:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.destino}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Placa del Bus:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.placaBus}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Reservas:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.resevas}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Método de Pago:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.metodoPago}}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Monto Total:</label>
+                <input disabled type="text" class="form-control" value="{{boleta.montoTotal}}">
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 text-center d-flex align-items-end">
+            <button class="btn btn-primary w-100" (click)="volverAInicio()">Listo</button>
+        </div>
+        <div class="col-md-6 text-center d-flex align-items-end">
+            <button class="btn btn-success w-100" (click)="imprimirComprobante()">Imprimir Comprobante</button>
+        </div>
+    </div>
+</section>
