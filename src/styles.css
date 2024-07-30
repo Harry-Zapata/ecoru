@@ -29,3 +29,13 @@ body.dark h6,
 body.dark p {
   color: white !important; 
 }
+
+
+
+.modal {
+  z-index: 1050; /* o un número mayor */
+}
+
+.modal-backdrop {
+  z-index: 1040; /* o un número menor */
+}

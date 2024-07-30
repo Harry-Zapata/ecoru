@@ -40,9 +40,6 @@ export class HomeComponent implements OnInit {
         this.ciudades.push(trip.name);
       }
     })
-
-    console.log(this.ciudades);
-    
   }
   verDetalles(trip: any): void {
     this.router.navigate(['/trip-details'], { state: { trip } });
