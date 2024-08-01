@@ -17,6 +17,7 @@ import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
 import { BoletaComponent } from './usuario/boleta/boleta.component';
 import { CreateAdminComponent } from './admin/create-admin/create-admin.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CreateAdminComponent } from './admin/create-admin/create-admin.componen
     RouterModule, 
     FormsModule, 
     CoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDropzoneModule
   ], 
   exports: [
     HomeComponent,

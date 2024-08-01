@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
     declarations: [
         AppComponent, 
@@ -19,7 +20,8 @@ import { AuthModule } from './auth/auth.module';
         FormsModule,
         CoreModule,
         PagesModule,
-        AuthModule
+        AuthModule,
+        NgxDropzoneModule
     ]
 })
 export class AppModule { }

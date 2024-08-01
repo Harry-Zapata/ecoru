@@ -49,25 +49,48 @@
         </div>
     </div>
     <div class="form-section">
-        <div class="image-upload">
-            <span>Insertar imagen</span>
-            <input type="file" id="image-upload" accept="image/*">
-        </div>
-        <div class="form-fields">
-            <label for="nombre">NOMBRE:</label>
-            <input type="text" id="nombre" name="nombre" class="form-control">
 
-            <label for="descripcion">DESCRIPCIÓN:</label>
-            <textarea id="descripcion" name="descripcion" rows="4" class="form-control"></textarea>
+        <div class="form-fields" [formGroup]="form">
 
-            <label for="costo">COSTO:</label>
-            <input type="number" id="costo" name="costo" class="form-control">
+            <label for=""></label>
 
-            <label for="fecha-salida">FECHA SALIDA:</label>
-            <input type="date" id="fecha-salida" name="fecha-salida" class="form-control">
+            <label for="image">IMAGEN</label>
+            <input type="text" id="image" name="image" placeholder="Ingresa la URL" class="form-control"
+                formControlName="image">
 
-            <label for="fecha-llegada">FECHA LLEGADA:</label>
-            <input type="date" id="fecha-llegada" name="fecha-llegada" class="form-control">
+            <label for="name">NOMBRE:</label>
+            <input type="text" id="name" name="name" class="form-control" formControlName="name">
+
+            <label for="description">DESCRIPCIÓN:</label>
+            <textarea id="description" name="description" rows="4" class="form-control"
+                formControlName="description"></textarea>
+
+            <label for="cost">COSTO:</label>
+            <input type="number" id="cost" name="cost" class="form-control" formControlName="cost">
+
+            <label for="startDate">FECHA SALIDA:</label>
+            <input type="date" id="startDate" name="startDate" class="form-control" formControlName="startDate">
+
+            <label for="busLocation">Locacion del bus</label>
+            <input type="text" id="busLocation" name="busLocation" class="form-control" formControlName="busLocation">
+
+            <label for="busName">Nombre del bus</label>
+            <input type="text" id="busName" name="busName" class="form-control" formControlName="busName">
+
+            <label for="busPlate">Placa del bus</label>
+            <input type="text" id="busPlate" name="busPlate" class="form-control" formControlName="busPlate">
+
+            <label for="estado">Estado del Destino</label>
+            <select name="estado" id="estado" formControlName="estado" class="form-control">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+
+            <label for="seatsAvailable">Asientos Disponibles</label>
+            <input type="number" id="seatsAvailable" name="seatsAvailable" class="form-control" formControlName="seatsAvailable">
+
+
+
 
             <!-- Botón para añadir bus -->
             <button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#modalAgregarBus">
@@ -79,33 +102,6 @@
             <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#modalDescuento">
                 <i class="bi bi-percent"></i> Activar Descuento
             </button>
-
-            <!-- Modal para ingresar el porcentaje de descuento -->
-            <div class="modal fade" id="modalDescuento" tabindex="-1" aria-labelledby="modalDescuentoLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-sm"> <!-- Tamaño del modal pequeño -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalDescuentoLabel">Ingresar porcentaje de descuento</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                                <input type="number" class="form-control"
-                                placeholder="Ingrese dato" id="inputDescuento" style="width: 10%; height: 50px; font-size: 16px;">
-                                <span class="input-group-text" style="height: 50px;">%</span>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" onclick="agregarDescuento()">Aplicar
-                                Descuento</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Etiqueta para mostrar el descuento aplicado (no funciona xd)-->
-            <div id="descuentoAplicado"></div>
         </div>
     </div>
 
@@ -145,7 +141,7 @@
                                 <option value="Estacion 01">Estacion 01</option>
                                 <option value="Estacion 02">Estacion 02</option>
                                 <option value="Estacion 03  ">Estacion 03</option>
-                              </select>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -159,7 +155,35 @@
 
     <div class="form-actions">
         <button class="btn btn-danger cancel-btn">CANCELAR</button>
-        <button class="btn btn-success add-btn">AÑADIR</button>
+        <button class="btn btn-success add-btn" (click)="addTrip()">AÑADIR</button>
     </div>
-   
+
 </div>
+
+
+
+<!-- Modal para ingresar el porcentaje de descuento -->
+<div class="modal fade" id="modalDescuento" tabindex="-1" aria-labelledby="modalDescuentoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm"> <!-- Tamaño del modal pequeño -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDescuentoLabel">Ingresar porcentaje de descuento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Ingrese dato" id="inputDescuento"
+                        style="width: 10%; height: 50px; font-size: 16px;">
+                    <span class="input-group-text" style="height: 50px;">%</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="agregarDescuento()">Aplicar
+                    Descuento</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Etiqueta para mostrar el descuento aplicado (no funciona xd)-->
+<div id="descuentoAplicado"></div>
