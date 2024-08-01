@@ -95,6 +95,16 @@
                 <input disabled type="text" class="form-control" value="{{boleta.montoTotal}}">
             </div>
         </div>
+        <div class="col-12">
+            <label class="total-label">Pasajeros:</label>
+            <div class="pasajeros-list">
+                <div class="d-flex justify-content-between pasajero-item" *ngFor="let pasajero of boleta.pasajeros">
+                    <span class="pasajero-nombre">{{pasajero.nombre}}</span>
+                    <span class="pasajero-dni">{{pasajero.dni}}</span>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="row my-3">
         <div class="col-md-6 text-center d-flex align-items-end">

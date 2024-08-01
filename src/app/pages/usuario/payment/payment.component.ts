@@ -13,6 +13,51 @@ export class PaymentComponent implements OnInit {
   cantidadAsientos: number = 1; // Variable para almacenar la cantidad de asientos a reservar
   costoTotal: number = 0; // Variable para almacenar el costo total calculado
   form: FormGroup;
+  asientos: any[] = [];
+
+  dataPasajeros:any = [];
+  // cuando se actualize cantidadAsientos actualizar asientos
+
+  actualizarAsientos() {
+    this.asientos = [];
+    for (let i = 0; i < this.cantidadAsientos; i++) {
+      this.asientos.push(i + 1);
+    }
+  }
+  guardarPersonas(){
+    let payment = document.getElementById('payment-form') as HTMLFormElement;
+    let cantidadPersonas = payment.children.length;
+
+    for(let i = 0; i < cantidadPersonas; i++){
+      let name = payment.children[i].children[1].children[0] as HTMLInputElement;
+      let dni = payment.children[i].children[2].children[0] as HTMLInputElement;
+      let obj = {
+        nombre: name.value,
+        dni: dni.value
+      }
+      
+      this.dataPasajeros.push(obj);
+    }    
+
+    localStorage.setItem('dataPasajeros', JSON.stringify(this.dataPasajeros));
+    this.cerrarModal('paymentModal');
+    this.reservarAsientos();
+
+  }
+
+  
+  cerrarModal(modalElement: any) {
+    console.log('Editado');
+    let body = document.getElementsByTagName('body')[0] as HTMLElement;
+    let modal = document.getElementById(modalElement) as HTMLElement;
+    let capa = document.querySelector('.modal-backdrop');
+    capa?.remove();
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+    body.classList.remove('modal-open');
+    body.style.overflow = 'auto';
+  }
+
 
   contador = 0;
   constructor(
@@ -47,6 +92,8 @@ export class PaymentComponent implements OnInit {
   actualizarCostoTotal(): void {
     // Calcula el costo total multiplicando el costo del viaje por la cantidad de asientos a reservar
     this.costoTotal = this.trip?.cost * this.cantidadAsientos;
+
+    this.actualizarAsientos();
   }
 
 

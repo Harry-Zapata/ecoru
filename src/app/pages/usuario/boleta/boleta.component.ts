@@ -17,6 +17,9 @@ export class BoletaComponent implements OnInit {
     let id = url.split('/').pop();
     this.boleta = boletas.find((boleta:any) => boleta.id == id);
 
+    let pasajeros = JSON.parse(localStorage.getItem('dataPasajeros') || '[]');
+    this.boleta['pasajeros'] = pasajeros;
+
     console.log(this.boleta);
   }
   volverAInicio(){
