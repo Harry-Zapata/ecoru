@@ -15,7 +15,9 @@
 
 /* Estilos para cada tarjeta individual de viaje */
 .travel-card {
-  width: calc(25% - 20px); /* Ancho calculado como el 25% del contenedor menos el espacio entre tarjetas */
+  width: calc(
+    25% - 20px
+  ); /* Ancho calculado como el 25% del contenedor menos el espacio entre tarjetas */
   box-sizing: border-box; /* Incluye el relleno y el borde en el ancho y la altura total del elemento */
   border: 1px solid #ccc; /* Borde sólido con color gris claro */
   border-radius: 4px; /* Bordes redondeados */
@@ -26,22 +28,21 @@
 
 /* Estilos para las imágenes dentro de las tarjetas de viaje */
 .travel-card img {
-    width: 100%; /* La imagen ocupa el ancho completo de su contenedor (la tarjeta) */
-    height: auto; /* La altura se ajusta automáticamente para mantener la proporción de la imagen */
+  width: 100%; /* La imagen ocupa el ancho completo de su contenedor (la tarjeta) */
+  height: auto; /* La altura se ajusta automáticamente para mantener la proporción de la imagen */
 }
 
 /* Estilos para la descripción dentro de las tarjetas de viaje */
 .description {
-    padding: 10px; /* Relleno interno alrededor del texto de descripción */
+  padding: 10px; /* Relleno interno alrededor del texto de descripción */
 }
 
 /* Aumentar el espacio entre los botones en 'action-buttons'*/
 .action-buttons button {
-    margin-right: 10px; /* Ajusta el valor del margen a la derecha según tus necesidades, añade espacio entre botones*/
+  margin-right: 10px; /* Ajusta el valor del margen a la derecha según tus necesidades, añade espacio entre botones*/
 }
 
 /**/
-
 
 .travel-card {
   cursor: pointer;
@@ -52,79 +53,83 @@
   box-shadow: 0 4px 8px rgb(21, 132, 113);
 }
 
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Cambio de fuente */
+  background-color: #f4f4f4; /* Fondo más claro */
+  color: #333; /* Texto oscuro */
+}
 
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Cambio de fuente */
-            background-color: #f4f4f4; /* Fondo más claro */
-            color: #333; /* Texto oscuro */
-        }
+.container {
+  margin-top: 50px;
+  position: relative; /* Para posicionar los botones relativos a este contenedor */
+}
 
-        .container {
-            margin-top: 50px;
-            position: relative; /* Para posicionar los botones relativos a este contenedor */
-        }
+.search-bar {
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
 
-        .search-bar {
-            background-color: #ffffff; /* Fondo blanco */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+.form-label {
+  font-weight: bold;
+  color: #007bff; /* Azul brillante */
+}
 
-        .form-label {
-            font-weight: bold;
-            color: #007bff; /* Azul brillante */
-        }
+.form-control {
+  border-radius: 5px;
+}
 
-        .form-control {
-          border-radius: 5px;
-      }
+.btn-primary {
+  background-color: #007bff; /* Azul brillante */
+  border: none;
+}
 
-        .btn-primary {
-            background-color: #007bff; /* Azul brillante */
-            border: none;
-        }
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul oscuro al pasar el ratón */
+}
 
-        .btn-primary:hover {
-            background-color: #0056b3; /* Azul oscuro al pasar el ratón */
-        }
+.action-buttons {
+  /* Posicionamiento de los botones */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999; /* Asegura que estén sobre los viajes */
+}
 
-        .action-buttons {
-          /* Posicionamiento de los botones */
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          z-index: 999; /* Asegura que estén sobre los viajes */
-      }
+.travel-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-      
+.travel-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-        .travel-card {
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+.travel-card .card-body {
+  padding: 20px;
+}
 
-        .travel-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+.travel-card .card-text {
+  color: #555; /* Texto gris oscuro */
+}
 
-        .travel-card .card-body {
-            padding: 20px;
-        }
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
 
-        .travel-card .card-text {
-            color: #555; /* Texto gris oscuro */
-        }
-  
-
-
-
-
-
-
-
-
+.travel-card {
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card {
+  width: 100%;
+}

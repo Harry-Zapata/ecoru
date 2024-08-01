@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,19 +7,116 @@ import { Router } from '@angular/router';
   templateUrl: './edit-trip.component.html',
   styleUrl: './edit-trip.component.css'
 })
-export class EditTripComponent {
-  trips = [
-    { image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Mancorabeach1.jpg/800px-Mancorabeach1.jpg', description: 'Lima, la ciudad de cerros con lunas', name: 'MANCORA', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://mediaim.expedia.com/destination/1/d72390e88197da3ae0d70a23fb6af4f9.jpg"', description: 'Ayacucho abrigador', name: 'Cajamarca', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus abc', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://www.plataforma10.com.pe/viajes/wp-content/uploads/2023/05/cajamarca-aerea.webp', description: 'Cajamarca Celestial', name: 'Cajamarca', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://cdn.pixabay.com/photo/2017/05/12/23/09/arequipa-2308382_1280.jpg', description: 'Arequipa místico', name: 'Arequipa', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://media.istockphoto.com/id/515972508/es/foto/plaza-de-armas.jpg?s=612x612&w=0&k=20&c=G3WFkOR2nrVOKpDwpenPqUrp9_lFJFjJ6M6ItuPz79Q=', description: 'Cusco extrovertido', name: 'Cusco', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://elcomercio.pe/resizer/cwJfD7zYu2qtN76bk6s0eH9v-gA=/1200x900/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/JUTY3PKYF5DQPLDSGQHVY5OMT4.jpg', description: 'Lambayeque único', name: 'Lambayeque', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN8k_-U-tK_v_o-uLxnZKUGFyQ6zzLCHWHgA&s', description: 'Junín deseable', name: 'Junin', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://www.xtravelperu.com/blog/wp-content/uploads/2023/06/puno-imagen-xtravel.jpg', description: 'Puno cálido', name: 'Puno', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://e.rpp-noticias.io/large/2014/08/01/1068979.jpg', description: 'Cascas inolvidable', name: 'Cascas', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },
-    { image: 'https://noticias-pe.laiglesiadejesucristo.org/media/960x540/Chimbote-2.jpg', description: 'Chimbote mágico', name: 'Chimbote', cost: 1000, startDate: '2024-07-01', endDate: '2024-07-10', busName: 'Bus XYZ', busPlate: 'ABC-123', busLocation: 'Terminal Central', seatsAvailable: 20 },// Otros viajes aquí
-  ];
+export class EditTripComponent implements OnInit {
+  trips: any;
+  editarForm: FormGroup;
+  editID!: number;
+  deleteId!: number;
+  dataEditar!: any;
+  idHabilitar!: number;
 
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.editarForm = this.fb.group({
+      name: [''],
+      description: [''],
+      cost: ['']
+    })
+  }
+
+
+  ngOnInit(): void {
+    this.trips = JSON.parse(localStorage.getItem('trips') || '[]');
+
+    let desactivados: any = [];
+    this.trips.forEach((trip: any) => {
+      if (trip.estado === 'Inactivo') {
+        desactivados.push(trip);
+      }
+    })
+    this.trips = desactivados;
+  }
+
+
+  editar() {
+    let tripsArray = localStorage.getItem('trips');
+
+    if (tripsArray) {
+      let tripsA = JSON.parse(tripsArray);
+      tripsA.forEach((trip: any) => {
+        if (trip.id == this.editID) {
+          trip.name = this.editarForm.value.name;
+          trip.description = this.editarForm.value.description;
+          trip.cost = this.editarForm.value.cost;
+        }
+      })
+      localStorage.setItem('trips', JSON.stringify(tripsA));
+    }
+
+    this.ngOnInit();
+    this.cerrarModal("editModal");
+  }
+
+  eliminar() {
+    this.trips.forEach((trip: any) => {
+      if (trip.id == this.deleteId) {
+        this.trips.splice(this.trips.indexOf(trip), 1);
+      }
+    })
+    this.cerrarModal("deleteModal");
+    localStorage.setItem('trips', JSON.stringify(this.trips));
+  }
+
+
+  pasarId(id: any) {
+    this.editID = id;
+
+    this.trips.forEach((trip: any) => {
+      if (trip.id == this.editID) {
+        this.dataEditar = trip;
+        this.editarForm.setValue({
+          'name': trip.name,
+          'description': trip.description,
+          'cost': trip.cost
+        })
+      }
+    })
+  }
+
+  habilitar() {
+    let tripsArray = localStorage.getItem('trips');
+
+    if (tripsArray) {
+      let tripsA = JSON.parse(tripsArray);
+      tripsA.forEach((trip: any) => {
+        if (trip.id == this.idHabilitar) {
+          trip.estado = 'Activo';
+        }
+      })
+      localStorage.setItem('trips', JSON.stringify(tripsA));
+    }
+
+    this.ngOnInit();
+    this.cerrarModal("setNewModal");
+  }
+  pasarIDDelete(id: any) {
+    this.deleteId = id;
+  }
+
+  pasarIdHabilitar(id: any) {
+    this.idHabilitar = id;
+  }
+  cerrarModal(modalElement: any) {
+    console.log('Editado');
+    let body = document.getElementsByTagName('body')[0] as HTMLElement;
+    let modal = document.getElementById(modalElement) as HTMLElement;
+    let capa = document.querySelector('.modal-backdrop');
+    capa?.remove();
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+    body.classList.remove('modal-open');
+    body.style.overflow = 'auto';
+  }
 
 }

@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationManagementComponent implements OnInit {
   reservations = [
-    { id: 1, user: 'User1', dates: '2024-07-01 to 2024-07-05', status: 'Active', totalPrice: 500 },
-    { id: 2, user: 'User2', dates: '2024-06-15 to 2024-06-20', status: 'Canceled', totalPrice: 300 },
+    { id: 1, user: 'Milagros', dates: '2024-07-01 to 2024-07-05', status: 'Active', totalPrice: 'S/500' },
+    { id: 2, user: 'Jhovanny', dates: '2024-06-15 to 2024-06-20', status: 'Canceled', totalPrice: 'S/300' },
+    { id:3, user: 'Astrid', dates: '2024-o7-24 to 2024-07-31', status:'Activado' ,totalPrice:'S/200'},
     // add more reservation data as needed
   ];
   selectedReservation: any;
+
+  // Static data for the company
+  companyName = 'TRANSPORTES XYZ S.A.C.';
+  ruc = '12345678901';
 
   constructor() { }
 

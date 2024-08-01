@@ -32,7 +32,7 @@
                 </li>
                     <!-- falta crear interface para agregar admin -->
                 <li>
-                  <a class="dropdown-item" [routerLink]="['/add-admin']">
+                  <a class="dropdown-item" [routerLink]="['/create-admin']">
                     <img src="https://cdn.pixabay.com/photo/2017/07/11/13/56/user-2493635_1280.png" alt="Añadir Admin" width="24" height="24" style="margin-right: 8px;">
                     Añadir Administrador
                   </a>
@@ -44,10 +44,16 @@
                   </a>
                 </li>
                 <li>
+                  <a class="dropdown-item" [routerLink]="['/manage']">
+                    <img src="https://cdn-icons-png.flaticon.com/512/115/115893.png" alt="Informes de Actividad" width="24" height="24" style="margin-right: 8px;">
+                    Gerencia
+                  </a>
+                </li>
+                <li>
                   <a class="dropdown-item" (click)="logout()" style="color:white; background-color: red; border: 1px solid red; border-radius: 4px; padding: 8px 16px; display: flex; align-items: center; text-align: center;">
                     <img src="https://cdn-icons-png.freepik.com/512/59/59399.png" alt="Cerrar Sesión" width="24" height="24" style="margin-right: 8px;">
                     Cerrar Sesión
-                  </a>                  
+                  </a>             
                 </li>
                 
               </ul>

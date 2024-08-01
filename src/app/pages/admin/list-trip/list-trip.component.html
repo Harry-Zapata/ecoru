@@ -4,33 +4,35 @@
 
     <!-- Barra de búsqueda -->
     <div class="container mt-4 search-bar">
-        <form class="row mb-4" [formGroup]="filtro"] (ngSubmit)="filtrarDatos()">
+        <div class="row mb-4">
             <div class="col-md-2">
                 <label class="form-label" for="origin">Origen</label>
-                <select id="origin" class="form-control" formControlName="origen">
-                    <option value="" disabled selected>ORIGEN</option>
+                <select id="origin" class="form-control">
+                    <option>ORIGEN</option>
                     <option>Trujillo</option>
                 </select>
             </div>
             <div class="col-md-2">
                 <label class="form-label" for="destination">Destino</label>
-                <select id="destination" class="form-control" formControlName="destino">
-                    <option value="" disabled selected>DESTINOS</option>
-                    <option *ngFor="let city of ciudades" [value]="city">{{city}}</option>
+                <select id="destination" class="form-control">
+                    <option>DESTINOS</option>
+                    <option>Cajamarca</option>
+                    <option>Lima</option>
+                    <option>Chiclayo</option>
                 </select>
             </div>
             <div class="col-md-2">
                 <label class="form-label" for="start-date">Fecha de inicio:</label>
-                <input type="date" id="start-date" class="form-control" formControlName="fechaInicio">
+                <input type="date" id="start-date" class="form-control">
             </div>
             <div class="col-md-2">
                 <label class="form-label" for="end-date">Fecha de llegada:</label>
-                <input type="date" id="end-date" class="form-control" formControlName="fechaFin">
+                <input type="date" id="end-date" class="form-control">
             </div>
             <div class="col-md-1 d-flex align-items-end">
                 <button class="btn btn-primary">Buscar</button>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="row mb-2">
@@ -50,7 +52,7 @@
     </div>
 
     <div class="travel-grid">
-        <div class="card travel-card" *ngFor="let trip of filtroBackUp">
+        <div class="card travel-card" *ngFor="let trip of trips">
             <img [src]="trip.image" class="card-img-top" alt="Trip Image" />
             <div class="card-body">
                 <p class="card-text">{{ trip.description }}</p>
@@ -58,13 +60,14 @@
                 <div class="btn-group">
                     <!-- Botón Editar -->
                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#editModal">
+                        data-bs-target="#editModal" (click)="pasarId(trip.id)">
                         EDITAR
                     </button>
+                    
 
                     <!-- Botón Deshabilitar -->
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#disableModal">
+                        data-bs-target="#disableModal" (click)="pasarIdDesabilitar(trip.id)">
                         DESHABILITAR
                     </button>
                 </div>
@@ -73,24 +76,50 @@
     </div>
 
     <!-- Modal Editar -->
-    <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editModalLabel">Editar</h1>
+                    <h5 class="modal-title" id="editModalLabel">Editar Destino</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>¿Seguro que deseas editar este ítem?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Aceptar</button>
+                    <!-- Formulario de edición -->
+                    <form id="editForm" [formGroup]="editarForm" (submit)="editar()">
+                        <div class="mb-3">
+                            <label for="destinationName" class="form-label">Nombre del Destino</label>
+                            <input type="text" class="form-control" id="destinationName" formControlName="name" required >
+                        </div>
+                        <div class="mb-3">
+                            <label for="destinationDescrip" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="destinationDescrip" formControlName="description" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="destinationCost" class="form-label">Costo del Destino</label>
+                            <input type="number" class="form-control" id="destinationCost" formControlName="cost" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('editForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Aquí puedes agregar el código para guardar los cambios
+            console.log('Nombre del Destino:', document.getElementById('destinationName').value);
+            console.log('Costo del Destino:', document.getElementById('destinationCost').value);
+            console.log('Descripción de Destino:', document.getElementById('destinationDescrip').value);
+            // Cerrar el modal después de guardar los cambios
+            var myModalEl = document.getElementById('editModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl);
+            modal.hide();
+        });
+    </script>
 
     <!-- Modal Deshabilitar -->
     <div class="modal fade" id="disableModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -106,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-danger">Deshabilitar</button>
+                    <button type="button" class="btn btn-danger" (click)="desabilitar()">Deshabilitar</button>
                 </div>
             </div>
         </div>

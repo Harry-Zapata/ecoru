@@ -22,7 +22,7 @@
             <p class="card-text details"><strong>Ubicación:</strong> {{ trip?.busLocation }}</p>
             <p class="card-text details"><strong>Asientos Disponibles:</strong>
               <select class="form-select" [(ngModel)]="cantidadAsientos" (ngModelChange)="actualizarCostoTotal()">
-                <option *ngFor="let asiento of asientosDisponibles">{{ asiento }}</option>
+                <option *ngFor="let asiento of asientosDisponibles" value="{{ asiento }}">{{ asiento }}</option>
               </select>
             </p>
           </div>

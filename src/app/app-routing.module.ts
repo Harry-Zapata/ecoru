@@ -17,8 +17,10 @@ import { NotifyComponent } from './pages/admin/notify/notify.component';
 import { ReservationManagementComponent } from './pages/admin/reservation-management/reservation-management.component';
 import { TravelHistoryComponent } from './pages/usuario/travel-history/travel-history.component';
 import { BoletaComponent } from './pages/usuario/boleta/boleta.component';
+import { CreateAdminComponent } from './pages/admin/create-admin/create-admin.component';
 
 const routes: Routes = [
+  { path: 'create-admin', component: CreateAdminComponent },
   // { path: '', redirectTo: '/login', pathMatch: 'full' }, //verificar estosw
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },

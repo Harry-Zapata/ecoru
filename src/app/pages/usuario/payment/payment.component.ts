@@ -33,7 +33,7 @@ export class PaymentComponent implements OnInit {
     })
   }
   // Supongamos que estos son los asientos disponibles
-  asientosDisponibles: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  asientosDisponibles: number[] = [1, 2, 3, 4, 5];
 
   ngOnInit(): void {
     this.trip = history.state.trip;
@@ -71,6 +71,16 @@ export class PaymentComponent implements OnInit {
     }
     this.contador++;
     obj['id'] = this.contador;
+
+    let Trips = JSON.parse(localStorage.getItem('trips') || '[]');
+
+    Trips.forEach((trip: any) => {
+      if (trip.id == this.trip?.id) {
+        trip.seatsAvailable = trip.seatsAvailable - this.cantidadAsientos;
+      }
+    })
+
+    localStorage.setItem('trips', JSON.stringify(Trips));
 
     let boletas = JSON.parse(localStorage.getItem('boletas') || '[]');
     boletas.push(obj);

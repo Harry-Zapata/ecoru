@@ -7,9 +7,11 @@ import { Router } from '@angular/router';
     styleUrl: './add-trip.component.css'
   })
 export class AddTripComponent {
+
+
 logout() {
 throw new Error('Method not implemented.');
 } 
-
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }  
 }

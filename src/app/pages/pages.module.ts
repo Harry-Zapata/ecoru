@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
 import { BoletaComponent } from './usuario/boleta/boleta.component';
+import { CreateAdminComponent } from './admin/create-admin/create-admin.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -30,6 +32,7 @@ import { BoletaComponent } from './usuario/boleta/boleta.component';
     NotifyComponent,
     ReservationManagementComponent,
     AdminDashComponent,
+    CreateAdminComponent,
     BoletaComponent
   ],
   imports: [
@@ -45,6 +48,7 @@ import { BoletaComponent } from './usuario/boleta/boleta.component';
     ProfileComponent,
     BoletaComponent,
     TripDetailsComponent,
+    CreateAdminComponent,
     TravelHistoryComponent]
 })
 export class PagesModule { }

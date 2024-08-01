@@ -30,4 +30,5 @@ export class LoginComponent {
   onForgotPassword() {
     alert('Funcionalidad de recordar contraseña aún no implementada');
   }
+  
 }

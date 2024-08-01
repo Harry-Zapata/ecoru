@@ -16,10 +16,14 @@ export class UserService {
     }
   }
 
-  registerUser(user: any) {
+  registerUser(user: any): boolean {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
+    if (users.find((u: any) => u.username === user.username)) {
+      return false; // Usuario ya existe
+    }
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
+    return true;
   }
 
   loginUser(username: string, password: string): boolean {
